@@ -8,5 +8,5 @@ data class DataModel (
     val id: Int,
     @Json(name = "listId")
     val listId: Int,
-    val name: String,
+    val name: String?,
 )
