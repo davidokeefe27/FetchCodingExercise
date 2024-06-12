@@ -25,7 +25,6 @@ class NameViewModel @Inject constructor(
             val dataList = mutableListOf<DataUIModel>()
             if (response is NetworkResult.Success) {
                 val dataFromRepo = response.data.orEmpty()
-                Timber.d("HEYY: $dataFromRepo")
                 dataFromRepo.forEach {
                     if (!it.name.isNullOrEmpty()) {
                         dataList.add(dataToDataUI(it))
@@ -35,6 +34,8 @@ class NameViewModel @Inject constructor(
                     compareBy({ it.listId }, { it.name })
                 )
                 _data.value = dataList
+            } else if (response is NetworkResult.Error) {
+                Timber.d("Error: ${response.message}")
             }
         }
     }
